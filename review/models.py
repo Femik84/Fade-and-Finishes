@@ -3,17 +3,20 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from service.models import Service  
 
 class Review(models.Model):
-    service = models.ForeignKey(
+    services = models.ManyToManyField(
         Service,
-        on_delete=models.CASCADE,
         related_name="reviews"
     )
+
     name = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add=True)
+
     stars = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
+
     comment = models.TextField()
+
     profile_picture = models.ImageField(
         upload_to="reviews/profile_pictures/",
         blank=True,
