@@ -1,20 +1,9 @@
 from rest_framework import serializers
 from .models import Gallery
+from categories.models import Category
 from categories.serializers import CategorySerializer
-from .models import Artist
-from artist.serializers import ArtistSerializer
 from artist.models import Artist
-
-
-class ArtistSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Artist
-        fields = [
-            "id",
-            "name",
-            "photo",
-        ]
-
+from artist.serializers import ArtistSerializer
 
 
 class GallerySerializer(serializers.ModelSerializer):
@@ -24,7 +13,7 @@ class GallerySerializer(serializers.ModelSerializer):
 
     # WRITE
     category_id = serializers.PrimaryKeyRelatedField(
-        queryset=Gallery._meta.get_field("category").remote_field.model.objects.all(),
+        queryset=Category.objects.all(),
         write_only=True,
         source="category"
     )
@@ -46,11 +35,11 @@ class GallerySerializer(serializers.ModelSerializer):
             "category_id",
             "artist",
             "artist_id",
-            "hero_image",
-            "before_image",
-            "after_image",
+            "hero_image", 
             "min_price",
             "max_price",
+            "is_featured",
+            "is_portfolio_grid",
             "created_at",
             "updated_at",
         ]

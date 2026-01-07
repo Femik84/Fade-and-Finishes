@@ -1,6 +1,6 @@
 from django.db import models
 from categories.models import Category
-from artist.models import Artist  # adjust app name if different
+from artist.models import Artist
 
 
 class Gallery(models.Model):
@@ -24,14 +24,6 @@ class Gallery(models.Model):
         upload_to="gallery/hero/"
     )
 
-    before_image = models.ImageField(
-        upload_to="gallery/before/"
-    )
-
-    after_image = models.ImageField(
-        upload_to="gallery/after/"
-    )
-
     min_price = models.DecimalField(
         max_digits=10,
         decimal_places=2
@@ -41,6 +33,9 @@ class Gallery(models.Model):
         max_digits=10,
         decimal_places=2
     )
+
+    is_featured = models.BooleanField(default=False)
+    is_portfolio_grid = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
