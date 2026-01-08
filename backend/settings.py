@@ -1,11 +1,4 @@
 from pathlib import Path
-import os
-from dotenv import load_dotenv
-
-# --------------------------------------------------
-# LOAD ENVIRONMENT VARIABLES
-# --------------------------------------------------
-load_dotenv()
 
 # --------------------------------------------------
 # BASE DIR
@@ -15,10 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --------------------------------------------------
 # SECURITY
 # --------------------------------------------------
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "django-insecure-dev-key"  
-)
+SECRET_KEY = "django-insecure-+ex-pvknkx%k7d-k9tmj*-32pqdn8%gw$@o7roozqapssy!9qz"
 
 DEBUG = True
 
@@ -27,10 +17,7 @@ ALLOWED_HOSTS = ["*"]
 # --------------------------------------------------
 # CORS
 # --------------------------------------------------
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
-
+CORS_ALLOW_ALL_ORIGINS = True
 
 # --------------------------------------------------
 # APPLICATIONS
@@ -51,7 +38,6 @@ INSTALLED_APPS = [
     "artist",
     "categories",
     "gallery",
-    "contact",
 ]
 
 # --------------------------------------------------
@@ -146,15 +132,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": None,
 }
-
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASS")
-
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
